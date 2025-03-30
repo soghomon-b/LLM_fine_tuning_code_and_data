@@ -11,32 +11,32 @@ from transformers import AutoModelForSeq2SeqLM
 from transformers import DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
 
 
-# Constants
-lang1 = "texts_lang1.txt" #txt file with sentences in input language on each line. 
-lang2 = "texts_lang2.txt" #txt file with sentences; in input language translation to target language on each line.
-BLEU = "bleu"
-TARGET = "target lang name"
-TARGET_TEXT = "summaries"
-EPOCH = "epoch"
-INPUT_IDS = "input_ids"
-FILENAME = "TranslationDataset.csv"
-GEN_LEN = "gen_len"
-MAX_INPUT_LENGTH = 128
-MAX_TARGET_LENGTH = 128
-MODEL_CHECKPOINT = "eslamxm/mt5-base-arabic" #the model names from huggingface
-MODEL_NAME = 's1'
-LABELS = "labels"
-PREFIX = ""
-SOURCE = "source language name"
-SOURCE_TEXT = "full_texts"
-SCORE = "score"
-SEQ2SEQName = "translation"
 
-model_name = 's1'
-lr = 0.0002
-decay = 0.227812
-batch_size = 32
-epochs = 6
+# Constants
+lang1 = "texts_lang1.txt"  # Path to the text file containing sentences in the input language (one sentence per line).
+lang2 = "texts_lang2.txt"  # Path to the text file containing the corresponding translations in the target language (one sentence per line).
+BLEU = "bleu"  # Name of the metric for evaluating translation quality (BLEU score used in the paper).
+TARGET = "target lang name"  # Name of the target language for translation (e.g., "French").
+TARGET_TEXT = "summaries"  # The label for the target language text in your dataset.
+EPOCH = "epoch"  # Label for the epoch number in the training data.
+INPUT_IDS = "input_ids"  # Label for input IDs after tokenization.
+
+GEN_LEN = "gen_len"  # label for generation legnth
+MAX_INPUT_LENGTH = 128  # Maximum length for the input text (after tokenization).
+MAX_TARGET_LENGTH = 128  # Maximum length for the target text (after tokenization).
+MODEL_CHECKPOINT = "eslamxm/mt5-base-arabic"  # The model name (from HuggingFace) for the pretrained model.
+MODEL_NAME = 's1'  # The name of the model being trained or fine-tuned.
+PREFIX = ""  # Prefix for input text, if needed for certain models (e.g., translation models might use a specific prompt).
+SOURCE = "source language name"  # Name of the source language for translation (e.g., "English").
+SOURCE_TEXT = "full_texts"  # The label for the source language text in your dataset.
+SCORE = "score"  # label for the score (e.g., BLEU score, translation quality).
+SEQ2SEQName = "translation"  # The name used for the sequence-to-sequence model (e.g., "translation").
+
+# Hyperparameters
+lr = 0.0002  # Learning rate for training.
+decay = 0.227812  # Learning rate decay factor.
+batch_size = 32  # Batch size for training.
+epochs = 6  # Number of epochs for training.
 
 def postprocess_text(preds: list, labels: list) -> tuple:
     """Performs post processing on the prediction text and labels"""
